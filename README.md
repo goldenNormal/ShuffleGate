@@ -35,17 +35,6 @@ Analyze the experimental results using:
 jupyter notebook agg_results.ipynb
 ```
 
-## Project Structure
-```
-.
-├── quick_data/          # Dataset directory
-├── exp_save/           # Experimental results
-├── search_and_retrain.py    # Main experiment script
-├── agg_results.ipynb   # Results analysis notebook
-└── requirements.txt    # Package dependencies
-```
-
-
 
 
 ## Citation
