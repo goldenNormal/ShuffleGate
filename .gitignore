@@ -12,6 +12,8 @@ build/
 develop-eggs/
 dist/
 downloads/
+quick_data/
+exp_save/
 eggs/
 .eggs/
 lib/

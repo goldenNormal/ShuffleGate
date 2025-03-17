@@ -1,9 +1,4 @@
 fs_config:
-    adafs:
-        pretrain_epoch: 0
-        hidden_size: 16
-        dropout: 0.2
-        update_frequency: 4
     autofield:
         update_frequency: 10
     gbdt:
@@ -25,10 +20,7 @@ fs_config:
         selection: cyclic
     lpfs:
     no_selection:
-    pca:
     shark:
-    polar_pruning:
-        polar_weight: 1
     sfs:
         num_batch_sampling: 100
     rf:
