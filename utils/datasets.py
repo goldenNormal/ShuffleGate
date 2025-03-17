@@ -215,4 +215,6 @@ def quick_read_dataset(dataset, data_path = './quick_data', selected_features=No
 
 
 if __name__ == 'main':
+    # First, download the dataset from https://huggingface.co/datasets/Jia-py/ERASE_Dataset to the `./data` directory,
+    # then execute the function `produce_quick_data` below to generate a new dataset in the `./quick_data` directory, which has smaller storage and faster reading speed.
     produce_quick_data()
