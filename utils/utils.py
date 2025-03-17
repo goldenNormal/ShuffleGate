@@ -186,28 +186,3 @@ def shuffle_features_across_batch_v1(x):
     shuffled_x = shuffled_x.permute(1, 0, 2)  # restore original shape (b, f, e)
     
     return shuffled_x
-
-
-
-    
-    model_state_dict = model.state_dict()
-    
-    old_model_state_dict=torch.load(f'{args.save_dir}/warmup_ckpt/{args.dataset}-{args.model}-0.pth')
-    
-    # 遍历模型 B 的 state_dict
-    for name, param in model_state_dict.items():
-        # 如果模型 A 中有同名的参数
-        if name in old_model_state_dict:
-            # 检查形状是否匹配
-            if param.shape == old_model_state_dict[name].shape:
-                # 加载模型 A 的参数到模型 B
-                model_state_dict[name] = old_model_state_dict[name]
-            else:
-                print(f"参数 {name} 形状不匹配，跳过加载")
-        else:
-            print(f"参数 {name} 在模型 A 中不存在，跳过加载")
-
-    # 将更新后的 state_dict 加载到模型 B
-    model.load_state_dict(model_state_dict, strict=False)
-    
-    return model
