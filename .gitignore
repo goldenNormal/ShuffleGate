@@ -12,7 +12,6 @@ build/
 develop-eggs/
 dist/
 downloads/
-quick_data/
 exp_save/retrain_result.csv
 eggs/
 .eggs/
