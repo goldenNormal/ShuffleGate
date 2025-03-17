@@ -138,55 +138,57 @@ def str2bool(v):
     
 def shuffle_features_across_batch_v2(x):
     """
-    对输入的 tensor 进行特征 shuffle，每个特征在 batch 维度上进行独立的 shuffle。
+    Shuffle features across the batch dimension for the input tensor, where each feature is independently shuffled.
     
-    参数:
-        x (torch.Tensor): 输入的 tensor，形状为 (b, f, e)，其中 b 是 batch size，f 是特征数量，e 是 embedding size。
+    Args:
+        x (torch.Tensor): Input tensor with shape (b, f, e), where b is batch size, f is number of features, 
+        and e is embedding size.
     
-    返回:
-        torch.Tensor: shuffle 后的 tensor，形状与输入相同。
+    Returns:
+        torch.Tensor: Shuffled tensor with the same shape as input.
     """
     b, f, e = x.shape
     
-    # 生成随机排列的索引
-    rand_values = torch.rand(f, b,device=x.device)  # 形状: (f, b)
-    indices = rand_values.argsort(dim=1)  # 形状: (f, b)
+    # Generate random permutation indices
+    rand_values = torch.rand(f, b,device=x.device)  # shape: (f, b)
+    indices = rand_values.argsort(dim=1)  # shape: (f, b)
     
-    # 扩展索引以匹配 x 的形状
-    indices = indices.unsqueeze(-1).expand(-1, -1, e)  # 形状: (f, b, e)
+    # Expand indices to match x's shape
+    indices = indices.unsqueeze(-1).expand(-1, -1, e)  # shape: (f, b, e)
     
-    # 使用 torch.gather 进行 shuffle
-    shuffled_x = torch.gather(x.permute(1, 0, 2), dim=1, index=indices)  # 沿着 batch 维度 shuffle
-    shuffled_x = shuffled_x.permute(1, 0, 2)  # 恢复原始形状 (b, f, e)
+    # Use torch.gather to shuffle
+    shuffled_x = torch.gather(x.permute(1, 0, 2), dim=1, index=indices)  # shuffle along batch dimension
+    shuffled_x = shuffled_x.permute(1, 0, 2)  # restore original shape (b, f, e)
     
     return shuffled_x
 
 def shuffle_features_across_batch_v1(x):
     """
-    对输入的 tensor 进行特征 shuffle，每个特征在 batch 维度上进行独立的 shuffle。
+    Shuffle features across the batch dimension for the input tensor, where each feature is independently shuffled.
     
-    参数:
-        x (torch.Tensor): 输入的 tensor，形状为 (b, f, e)，其中 b 是 batch size，f 是特征数量，e 是 embedding size。
+    Args:
+        x (torch.Tensor): Input tensor with shape (b, f, e), where b is batch size, f is number of features, 
+        and e is embedding size.
     
-    返回:
-        torch.Tensor: shuffle 后的 tensor，形状与输入相同。
+    Returns:
+        torch.Tensor: Shuffled tensor with the same shape as input.
     """
     b, f, e = x.shape
     
-    # 为每个特征生成一个独立的随机排列索引
-    indices = torch.stack([torch.randperm(b,device=x.device) for _ in range(f)], dim=0)  # 形状: (f, b)
+    # Generate independent random permutation indices for each feature
+    indices = torch.stack([torch.randperm(b,device=x.device) for _ in range(f)], dim=0)  # shape: (f, b)
     
-    # 扩展索引以匹配 x 的形状
-    indices = indices.unsqueeze(-1).expand(-1, -1, e)  # 形状: (f, b, e)
+    # Expand indices to match x's shape
+    indices = indices.unsqueeze(-1).expand(-1, -1, e)  # shape: (f, b, e)
     
-    # 使用 torch.gather 进行 shuffle
-    shuffled_x = torch.gather(x.permute(1, 0, 2), dim=1, index=indices)  # 沿着 batch 维度 shuffle
-    shuffled_x = shuffled_x.permute(1, 0, 2)  # 恢复原始形状 (b, f, e)
+    # Use torch.gather to shuffle
+    shuffled_x = torch.gather(x.permute(1, 0, 2), dim=1, index=indices)  # shuffle along batch dimension
+    shuffled_x = shuffled_x.permute(1, 0, 2)  # restore original shape (b, f, e)
     
     return shuffled_x
 
 
-def load_warmup_parameter(model,args):
+
     
     model_state_dict = model.state_dict()
     
