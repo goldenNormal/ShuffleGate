@@ -40,5 +40,13 @@ jupyter notebook agg_results.ipynb
 ## Citation
 If you find this work useful in your research, please consider citing our paper:
 ```
-[Citation will be added upon publication]
+@misc{huang2025shufflegateefficientselfpolarizingfeature,
+      title={ShuffleGate: An Efficient and Self-Polarizing Feature Selection Method for Large-Scale Deep Models in Industry}, 
+      author={Yihong Huang and Chen Chu and Fan Zhang and Fei Chen and Yu Lin and Ruiduan Li and Zhihao Li},
+      year={2025},
+      eprint={2503.09315},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG},
+      url={https://arxiv.org/abs/2503.09315}, 
+}
 ```
